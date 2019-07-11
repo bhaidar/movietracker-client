@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@bh/movie-tracker": [
+        "./src/app/movie-tracker/index.ts"
+      ],
+      "@bh/shared": [
+        "./src/app/shared/index.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

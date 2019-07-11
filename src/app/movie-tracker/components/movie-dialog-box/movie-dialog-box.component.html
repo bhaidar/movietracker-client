@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Row Action :: <strong>{{ action | titlecase }}</strong></h1>
+<div mat-dialog-content>
+	<ng-container *ngIf="action != 'delete'; else deleteTemplate">
+		<mat-form-field>
+			<input placeholder="Title" matInput [(ngModel)]="movie.title">
+		</mat-form-field>
+		<mat-form-field>
+			<input matInput [matDatepicker]="picker" placeholder="Watched On" [(ngModel)]="movie.watchedOn">
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field>
+			<input placeholder="Genre" matInput [(ngModel)]="movie.genre">
+		</mat-form-field>
+		<mat-star-rating name="rating" [(ngModel)]="movie.rating"></mat-star-rating>
+	</ng-container>
+	<ng-template #deleteTemplate>
+		Are you sure you want to delete <strong>{{ movie.title }}</strong>?
+	</ng-template>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="doAction()">{{ action | titlecase }}</button>
+	<button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
