@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { tap, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Component, ViewChild, ElementRef, OnInit, AfterViewInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
+import { tap, map, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MtAction } from '@bh/shared';
 
 @Component({
@@ -20,8 +20,9 @@ import { MtAction } from '@bh/shared';
 	`,
 	styleUrls: ['./movie-tracker-search-bar.component.scss']
 })
-export class MovieTrackerSearchBarComponent implements OnInit {
+export class MovieTrackerSearchBarComponent implements OnInit, OnDestroy {
 	private searchInput: HTMLInputElement;
+	private onDestroy$ = new Subject();
 
 	@ViewChild('searchInputEl', { static: true }) searchInputEl: ElementRef<HTMLInputElement>;
 
@@ -39,9 +40,14 @@ export class MovieTrackerSearchBarComponent implements OnInit {
 				}),
 				map(() => this.searchInput.value),
 				debounceTime(300),
-				distinctUntilChanged()
+				distinctUntilChanged(),
+				takeUntil(this.onDestroy$)
 			)
 			.subscribe(event => this.action.emit({ type: 'search', payload: event }));
+	}
+
+	ngOnDestroy(): void {
+		this.onDestroy$.next();
 	}
 
 	public reset(): void {
