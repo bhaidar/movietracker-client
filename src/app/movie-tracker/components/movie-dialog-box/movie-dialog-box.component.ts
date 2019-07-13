@@ -25,6 +25,12 @@ export interface MovieDialogBoxOptions {
 		mat-form-field {
   			width: 100%;
 		}
+		input.ng-touched.ng-invalid {
+			border-color: #dc3545;
+		}
+		input.ng-valid {
+			border-color: #28a745;
+		}
     `]
 })
 export class MovieDialogBoxComponent {
