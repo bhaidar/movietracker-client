@@ -22,6 +22,9 @@
       "@bh/movie-tracker": [
         "./src/app/movie-tracker/index.ts"
       ],
+      "@bh/auth": [
+        "./src/app/app-auth/index.ts"
+      ],
       "@bh/shared": [
         "./src/app/shared/index.ts"
       ]

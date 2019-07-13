@@ -1,27 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieTrackerModule } from './movie-tracker';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppAuthModule } from './app-auth/app-auth.module';
+import { AppSharedModule } from './shared/app-shared.module';
+import { jwtInterceptorProvider, errorInterceptorProvider } from './app-auth';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    AppSharedModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    AppAuthModule,
     MovieTrackerModule
   ],
-  providers: [],
+  providers: [
+    jwtInterceptorProvider,
+    errorInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
