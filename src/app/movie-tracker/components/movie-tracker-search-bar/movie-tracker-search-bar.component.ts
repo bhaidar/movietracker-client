@@ -14,9 +14,6 @@ import { MtAction } from '@bh/shared';
 			#searchInputEl
 			placeholder="Search"
 		/>
-		<div [hidden]="!searchInputEl.value" class="reset-icon" (click)="reset()">
-			<i class="material-icons">clear</i>
-		</div>
 	`,
 	styleUrls: ['./movie-tracker-search-bar.component.scss']
 })
